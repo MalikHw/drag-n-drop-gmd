@@ -2,19 +2,21 @@
     "geode": "5.7.0",
     "gd": {
         "win": "2.2081",
-        "mac": "2.2081",
-        "android": "2.2081",
-        "ios": "2.2081"
+        "mac": "2.2081"
     },
     "version": "1.0.0",
-    "id": "MalikHw.drag-n-drop-gmd",
-    "name": "drag-n-drop-gmd",
-    "developer": "MalikHw",
-    "description": "desc.",
-    "tags": ["yes", "yeah"],
+    "id": "malikhw47.drag-n-drop-gmd",
+    "name": "drag-n-drop GMD",
+    "developer": "MalikHw47",
+    "description": "Accepts dragging gmd files to gd window",
+    "tags": ["utility", "offline", "enhancement"],
     "links": {
         "source": "https://github.com/MalikHw/drag-n-drop-gmd",
         "community": "https://discord.gg/G9bZ92eg2n"
     },
-    "settings": {}
+    "dependencies":{
+        "camila314.drag-drop": ">=v2.0.0",
+        "hjfod.gmd-api": ">=1.5.0",
+        "miskaa.notif": "1.0.4-beta.4"
+    }
 }
