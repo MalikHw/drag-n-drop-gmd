@@ -1,20 +1,29 @@
 #include <Geode/Geode.hpp>
 #include <hjfod.gmd-api/include/GMD.hpp>
 #include <camila314.drag-drop/include/DragDrop.hpp>
-#include <miskaa.notif/src/includes/notif.hpp>
+#include <miskaa.notif/src/include/notifapi.hpp>
 
 using namespace geode::prelude;
 
-$on_mod(Loaded) {
-    DragDropEvent(DragDropType::Drop).listen([](std::filesystem::path const& path) -> bool {
-        if (path.extension() == ".gmd" || path.extension() == ".GMD") {
-            auto level = gmd::importGmdAsLevel(path);
-            if (level) {
-                notifapi::success("Imported .gmd file!");
-            } else {
-                notifapi::error("Failed to import .gmd somehow");
-            }
+#include <Geode/modify/MenuLayer.hpp>
+
+class $modify(MenuLayer) {
+    bool init() {
+        if (!MenuLayer::init()) return false;
+        
+        static bool hasSetUp = false;
+        if (!hasSetUp) {
+            hasSetUp = true;
+            handleDragDrop({ "gmd" }, [](ghc::filesystem::path path) {
+                auto result = gmd::importGmdAsLevel(path);
+                if (result.isOk()) {
+                    notifapi::success("Imported .gmd file!");
+                } else {
+                    notifapi::error("Failed to import .gmd somehow");
+                }
+            });
         }
+        
         return true;
-    }).leak();
-}
+    }
+};
