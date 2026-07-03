@@ -6,9 +6,7 @@
 using namespace geode::prelude;
 
 $on_mod(Loaded) {
-    static EventListener<DragDropEvent> listener;
-    listener.setFilter(DragDropType::Drop);
-    listener.bind([](std::filesystem::path const& path) {
+    DragDropEvent(DragDropType::Drop).listen([](std::filesystem::path const& path) {
         if (path.extension() == ".gmd" || path.extension() == ".GMD") {
             auto level = gmd::importGmdAsLevel(path);
             if (level) {
@@ -17,5 +15,5 @@ $on_mod(Loaded) {
                 notifapi::error("Failed to import .gmd somehow");
             }
         }
-    });
+    }).leak();
 }
