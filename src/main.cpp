@@ -1,7 +1,7 @@
 #include <Geode/Geode.hpp>
 #include <hjfod.gmd-api/include/GMD.hpp>
 #include <camila314.drag-drop/include/DragDrop.hpp>
-#include <miskaa.notif/src/include/notifapi.hpp>
+#include <miskaa.notif/src/includes/notif.hpp>
 
 using namespace geode::prelude;
 
