@@ -6,12 +6,17 @@
 using namespace geode::prelude;
 
 $on_mod(Loaded) {
-    handleDragDrop({ "gmd" }, [](auto path) {
-        auto level = gmd::importGmdAsLevel(path);
-        if (level) {
-            notifapi::success("Imported!");
-        } else {
-            notifapi::error("Failed!");
+    DragDropEvent::subscribe([](DragDropEvent* event) {
+        if (event->getType() == DragDropType::Drop) {
+            auto path = event->getData();
+            if (path.extension() == ".gmd" || path.extension() == ".GMD") {
+                auto level = gmd::importGmdAsLevel(path);
+                if (level) {
+                    notifapi::success("Imported gmd!");
+                } else {
+                    notifapi::error("Failed to import for some reason");
+                }
+            }
         }
     });
 }
